@@ -16,10 +16,13 @@ object CommonUtility {
 		   val property:Properties = prop.get
 
 		   PropertyLoaderUtil.map(property, propertyMap, true,
-			    {(i,value)=>i match{
-				    case 0 => commonPropBean.setDateFormat(value)
-				    case 1 => commonPropBean.setWritableDirectory(value)
-			}})
+			    {(i,value)=>if(value != null){ 
+			    	i match{
+					    case 0 => commonPropBean.setDateFormat(value)
+					    case 1 => commonPropBean.setWritableDirectory(value)
+			    	}
+			    }}
+			)
 	   }
 	}
 	
