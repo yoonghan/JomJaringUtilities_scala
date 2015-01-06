@@ -37,8 +37,12 @@ class EmailUtility {
 	      emailPropBean.getDateFormat().format(new Date()));
 	  sendEmail(subjectWithDate,message);
 	}
-		
+	
 	def sendEmail(subject:String, message:String){
+	  sendEmail(Option.empty,subject,message);
+	}
+		
+	def sendEmail(bccAdds:Option[String], subject:String, message:String){
 
 	  if(emailPropBean.getProperty == null){
 	    println("No authentication admitted")
@@ -63,6 +67,15 @@ class EmailUtility {
 		mimeMessage.addRecipient(Message.RecipientType.TO,
                               new InternetAddress(emailPropBean.getToUser()));
 
+		// Set bcc: header field to recipient
+		if(bccAdds.isDefined){
+		  val bccVal = bccAdds.get
+		  if(bccVal.indexOf(",") > -1)
+		    mimeMessage.addRecipients(Message.RecipientType.BCC, bccVal);
+		  else
+		    mimeMessage.addRecipient(Message.RecipientType.BCC, new InternetAddress(bccVal));
+		}
+		
 		//Set Subject: header field
 		mimeMessage.setSubject(subject);
 
