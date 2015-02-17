@@ -20,6 +20,16 @@ class TestCommon extends FlatSpec{
 		Assert.assertEquals("dd/MM/yyyy hh:mm:ss", CommonUtility.getCommonBeanValue.getDateFormat());
 	}
 	
+	"Number Conversion" should "have working ternary conversion" in{
+		import com.jaring.jom.util.converter.NumberConverter._
+		val tenDecimal = 10
+		val eightDecimal = 8
+		val nineDecimal = 9
+		Assert.assertTrue((tenDecimal.toTernaryString) == "101")
+		Assert.assertTrue((eightDecimal.toTernaryString) == "22")
+		Assert.assertTrue((nineDecimal.toTernaryString) == "100")
+	}
+	
 	"Email Bean" should "have properties read" in{
 		val propMapper = new CustomEmailBean();
 		

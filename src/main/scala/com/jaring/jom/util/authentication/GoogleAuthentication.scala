@@ -48,9 +48,9 @@ class GoogleAuthentication(val callBackURI:String)
 		return true;
 	}
 	
-	override def generateStateToken():String = {
+	override def generateStateToken:String = {
 		val sr1 = new SecureRandom();
-		return EnumAuthentication.GOOGLE_TOKEN .toString() + sr1.nextInt();
+		return EnumAuthentication.GOOGLE_TOKEN.toString() + sr1.nextInt();
 	}
 
 	override def getGeneratedOAuthURL(stateToken:String):Option[String] = {

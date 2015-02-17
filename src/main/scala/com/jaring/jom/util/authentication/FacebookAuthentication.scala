@@ -69,7 +69,7 @@ class FacebookAuthentication(val callBackURI:String)
 		return true;
 	}
 	
-	override def generateStateToken():String = {
+	override def generateStateToken:String = {
 		val sr1 = new SecureRandom();
 		return EnumAuthentication.FACEBOOK_TOKEN.toString() +sr1.nextInt();
 	}
