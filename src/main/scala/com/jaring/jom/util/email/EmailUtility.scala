@@ -59,10 +59,18 @@ class EmailUtility {
 	}
 		
 	def sendEmail(bccAdds:Option[String], subject:String, message:String){
-	  sendEmail(Option.empty, bccAdds, subject, message, Option.empty)
+	  sendEmail(Option.empty, bccAdds, subject, message, Option.empty, false)
+	}
+	
+	def sendEmail(toAdds:Option[String], bccAdds:Option[String], subject:String, message:String, multipart:Option[MimeMultipart]){
+	  sendEmail(Option.empty, bccAdds, subject, message, multipart, false)
 	}
 
-	def sendEmail(toAdds:Option[String], bccAdds:Option[String], subject:String, message:String, multipart:Option[MimeMultipart]){
+	def sendEmailAsHTML(toAdds:Option[String], bccAdds:Option[String], subject:String, message:String){
+	  sendEmail(Option.empty, bccAdds, subject, message, Option.empty, true)
+	}
+	
+	def sendEmail(toAdds:Option[String], bccAdds:Option[String], subject:String, message:String, multipart:Option[MimeMultipart], isHTML:Boolean){
 		if(emailPropBean.getProperty == null){
 			println("No authentication admitted")
 		}
@@ -101,7 +109,9 @@ class EmailUtility {
 			mimeMessage.setSubject(subject);
 	
 			// Now set the actual message
-			if(multipart.isDefined){
+			if(isHTML){
+			  mimeMessage.setContent(message, "text/html");
+			}else if(multipart.isDefined){
 			  val messageBodyPart = new MimeBodyPart()
 			  val defMultipart = multipart.get
 			  messageBodyPart.setText(message)
