@@ -17,6 +17,12 @@ class TestEmail extends FlatSpec{
 		emailUtil.sendEmail(Option("jomjaring@gmail.com,yoong.han@timwe.com"), "Test", "Test message")
 	}
   
+  "Email" should "be able to send as Html" in{
+		val emailUtil = new EmailUtility
+		emailUtil.sendEmailAsHTML(Option.empty, Option("jomjaring@gmail.com,yoong.han@timwe.com"), "Test", 
+"""<font color="red">Sample RED text</font>""")
+	}
+  
 //  "Email" should "be able to send attachment" in{
 //    val emailUtil = new EmailUtility
 //    val attachment = emailUtil.createMultipart("C:/temp/excel_54a4a4341d86e330ad740088.xlsx")
