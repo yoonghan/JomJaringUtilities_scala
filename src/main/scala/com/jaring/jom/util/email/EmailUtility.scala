@@ -16,6 +16,9 @@ import javax.mail.internet.MimeBodyPart
 import javax.activation.FileDataSource
 import javax.activation.DataHandler
 import javax.mail.internet.MimeMultipart
+import java.io.ByteArrayOutputStream
+import java.io.OutputStream
+import javax.mail.internet.MimeUtility
 
 class EmailUtility {
   
@@ -110,7 +113,13 @@ class EmailUtility {
 	
 			// Now set the actual message
 			if(isHTML){
-			  mimeMessage.setContent(message, "text/html");
+			  val messageBodyPart = new MimeBodyPart()
+			  val defMultipart = new MimeMultipart()
+			  messageBodyPart.setContent(message, """text/html; charset=utf-8""");
+			  defMultipart.addBodyPart(messageBodyPart)
+			  mimeMessage.setContent(defMultipart)
+			  
+			  
 			}else if(multipart.isDefined){
 			  val messageBodyPart = new MimeBodyPart()
 			  val defMultipart = multipart.get
