@@ -14,7 +14,7 @@ class TestEmail extends FlatSpec{
   
   "Email" should "be able to send multiple" in{
 		val emailUtil = new EmailUtility
-		emailUtil.sendEmail(Option("jomjaring@gmail.com,yoong.han@timwe.com"), "Test", "Test message")
+		emailUtil.sendEmail(Option("jomjaring@gmail.com,yoong.han@timwe.com"), "Test 2", "Test message")
 	}
   
   "Email" should "be able to send as Html" in{

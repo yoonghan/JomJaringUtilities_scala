@@ -39,6 +39,13 @@
 		<version>${oauth2.service.version}</version>
 		<scope>provided</scope>
 	</dependency>
+	<dependency>
+	    <groupId>org.imgscalr</groupId>
+	    <artifactId>imgscalr-lib</artifactId>
+	    <version>${imgscalr.version}</version>
+	    <type>jar</type>
+	    <scope>provided</scope>
+	  </dependency>
   </dependencies>
   
   <build>
