@@ -1,8 +1,6 @@
-JomJaringUtilities_scala
+walcron_scala
 ========================
-
 Converted jjutilities as scala written object.
-
 
 Publish
 =======
