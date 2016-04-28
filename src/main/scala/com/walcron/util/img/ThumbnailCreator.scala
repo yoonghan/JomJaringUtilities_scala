@@ -1,4 +1,4 @@
-package com.jaring.jom.util.img
+package com.walcron.util.img
 
 import java.awt.image.BufferedImage
 import org.imgscalr.Scalr

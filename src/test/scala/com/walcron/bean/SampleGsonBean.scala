@@ -1,4 +1,4 @@
-package com.bean
+package com.walcron.bean
 
 import scala.beans.BeanProperty
 import java.util.Date
@@ -10,5 +10,5 @@ class SampleGsonBean(@BeanProperty
   @BeanProperty
   var sampleString:String = new String("Test")
 
-  
+
 }

@@ -1,8 +1,8 @@
-package com.jaring.jom.util.gson
+package com.walcron.util.gson
 
 import com.google.gson.GsonBuilder
 import com.google.gson.Gson
-import com.jaring.jom.util.common.CommonUtility
+import com.walcron.util.common.CommonUtility
 
 object CustomGson {
 	val gson:Gson = new GsonBuilder().setDateFormat(CommonUtility.getCommonBeanValue.getDateFormat()).create();

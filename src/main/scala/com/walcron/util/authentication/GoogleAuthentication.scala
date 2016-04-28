@@ -1,4 +1,4 @@
-package com.jaring.jom.util.authentication
+package com.walcron.util.authentication
 
 import com.google.api.client.json.JsonFactory
 import com.google.api.client.http.HttpTransport
@@ -8,13 +8,13 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
 import scala.collection.mutable.ListBuffer
 import java.util.Arrays
 import java.security.SecureRandom
-import com.jaring.jom.util.impl.IOAuthImpl
+import com.walcron.util.impl.IOAuthImpl
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets
 import java.io.InputStream
-import com.jaring.jom.util.common.PropertyLoaderUtil
+import com.walcron.util.common.PropertyLoaderUtil
 import java.io.InputStreamReader
 import com.google.api.client.http.GenericUrl
-import com.jaring.jom.util.gson.CustomGson
+import com.walcron.util.gson.CustomGson
 import java.io.BufferedInputStream
 
 object GoogleAuthentication{

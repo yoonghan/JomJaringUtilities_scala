@@ -1,8 +1,8 @@
-package com.jaring.jom.util.bean
+package com.walcron.util.bean
 
 import scala.beans.BeanProperty
 import java.text.SimpleDateFormat
-import com.jaring.jom.util.common.CommonUtility
+import com.walcron.util.common.CommonUtility
 import java.util.Properties
 
 class EmailPropBean(){

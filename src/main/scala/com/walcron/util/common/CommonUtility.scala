@@ -1,6 +1,6 @@
-package com.jaring.jom.util.common
+package com.walcron.util.common
 
-import com.jaring.jom.util.bean.CommonPropBean
+import com.walcron.util.bean.CommonPropBean
 import java.util.Properties
 
 object CommonUtility {

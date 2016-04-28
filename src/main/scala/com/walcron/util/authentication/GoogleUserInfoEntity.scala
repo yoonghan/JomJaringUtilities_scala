@@ -1,4 +1,4 @@
-package com.jaring.jom.util.authentication
+package com.walcron.util.authentication
 
 class GoogleUserInfoEntity(
   var id:String = null,

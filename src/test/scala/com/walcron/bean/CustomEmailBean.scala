@@ -1,13 +1,13 @@
-package com.bean
+package com.walcron.bean
 
 import scala.beans.BeanProperty
 import java.text.SimpleDateFormat
-import com.jaring.jom.util.common.CommonUtility
+import com.walcron.util.common.CommonUtility
 import java.util.Properties
-import com.jaring.jom.util.bean.PropertyBeanMapper
+import com.walcron.util.bean.PropertyBeanMapper
 
 class CustomEmailBean extends PropertyBeanMapper{
-  
+
 	@BeanProperty
 	var toUser = ""
 	@BeanProperty

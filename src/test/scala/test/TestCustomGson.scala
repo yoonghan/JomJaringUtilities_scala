@@ -1,7 +1,7 @@
 package test
 
 import com.bean.SampleGsonBean
-import com.jaring.jom.util.gson.CustomGson
+import com.walcron.util.gson.CustomGson
 import org.junit.Assert
 import org.scalatest.FlatSpec
 import java.util.Date

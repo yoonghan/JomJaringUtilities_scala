@@ -1,4 +1,4 @@
-package com.jaring.jom.util.bean
+package com.walcron.util.bean
 
 import java.util.Properties
 

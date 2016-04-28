@@ -3,13 +3,13 @@ package test
 import org.junit.Test
 
 import org.junit.Assert
-import com.jaring.jom.util.common.CommonUtility
-import com.jaring.jom.util.common.PropertyLoaderUtil
+import com.walcron.util.common.CommonUtility
+import com.walcron.util.common.PropertyLoaderUtil
 import com.bean.CustomEmailBean
 import org.scalatest.FlatSpec
-import com.jaring.jom.util.authentication.GoogleAuthentication
-import com.jaring.jom.util.authentication.FacebookAuthentication
-import com.jaring.jom.util.authentication.EnumAuthentication
+import com.walcron.util.authentication.GoogleAuthentication
+import com.walcron.util.authentication.FacebookAuthentication
+import com.walcron.util.authentication.EnumAuthentication
 //
 //import org.junit.runner.RunWith
 //import org.scalatest.junit.JUnitRunner
@@ -21,7 +21,7 @@ class TestCommon extends FlatSpec{
 	}
 	
 	"Number Conversion" should "have working ternary conversion" in{
-		import com.jaring.jom.util.converter.NumberConverter._
+		import com.walcron.util.converter.NumberConverter._
 		val tenDecimal = 10
 		val eightDecimal = 8
 		val nineDecimal = 9

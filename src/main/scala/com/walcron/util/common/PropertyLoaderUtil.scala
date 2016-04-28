@@ -1,9 +1,9 @@
-package com.jaring.jom.util.common
+package com.walcron.util.common
 
 import java.io.InputStream
 import scala.io.Source
 import java.util.Properties
-import com.jaring.jom.util.bean.PropertyBeanMapper
+import com.walcron.util.bean.PropertyBeanMapper
 import java.io.FileNotFoundException
 
 object PropertyLoaderUtil {

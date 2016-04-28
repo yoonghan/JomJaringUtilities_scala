@@ -1,4 +1,4 @@
-package com.jaring.jom.util.bean
+package com.walcron.util.bean
 
 import scala.beans.BeanProperty
 import java.text.SimpleDateFormat

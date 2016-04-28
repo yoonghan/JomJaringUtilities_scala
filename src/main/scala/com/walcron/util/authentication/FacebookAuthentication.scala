@@ -1,12 +1,12 @@
-package com.jaring.jom.util.authentication
+package com.walcron.util.authentication
 
-import com.jaring.jom.util.impl.IOAuthImpl
+import com.walcron.util.impl.IOAuthImpl
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
 import com.google.api.client.json.jackson2.JacksonFactory
 import java.util.Arrays
 import java.security.SecureRandom
-import com.jaring.jom.util.bean.FacebookBean
-import com.jaring.jom.util.common.PropertyLoaderUtil
+import com.walcron.util.bean.FacebookBean
+import com.walcron.util.common.PropertyLoaderUtil
 import java.util.Properties
 import com.google.api.client.http.GenericUrl
 import com.google.api.client.auth.oauth2.ClientParametersAuthentication
@@ -15,7 +15,7 @@ import com.google.api.client.auth.oauth2.BearerToken
 import java.util.HashMap
 import com.google.api.client.http.HttpResponse
 import java.io.IOException
-import com.jaring.jom.util.gson.CustomGson
+import com.walcron.util.gson.CustomGson
 
 object FacebookAuthentication{
   	def getUserInfo(json:String) : FacebookUserInfoEntity = {

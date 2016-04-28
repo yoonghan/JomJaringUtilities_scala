@@ -1,6 +1,6 @@
 package test
 
-import com.jaring.jom.util.email.EmailUtility
+import com.walcron.util.email.EmailUtility
 import org.junit.Test
 import org.junit.Assert._
 import org.scalatest.junit.AssertionsForJUnit

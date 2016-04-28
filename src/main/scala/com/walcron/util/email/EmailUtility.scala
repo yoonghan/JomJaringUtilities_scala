@@ -1,12 +1,12 @@
-package com.jaring.jom.util.email
+package com.walcron.util.email
 
 import javax.mail.Authenticator
 import javax.mail.PasswordAuthentication
 import javax.mail.Session
 import javax.mail.internet.MimeMessage
 import javax.mail.internet.InternetAddress
-import com.jaring.jom.util.common.PropertyLoaderUtil
-import com.jaring.jom.util.bean.EmailPropBean
+import com.walcron.util.common.PropertyLoaderUtil
+import com.walcron.util.bean.EmailPropBean
 import java.util.Properties
 import scala.beans.BeanProperty
 import java.util.Date

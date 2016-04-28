@@ -1,4 +1,4 @@
-package com.jaring.jom.util.impl
+package com.walcron.util.impl
 
 trait IOAuthImpl {
 	def generateStateToken:String;

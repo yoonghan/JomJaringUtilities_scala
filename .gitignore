@@ -9,8 +9,7 @@ dist/*
 target/
 lib_managed/
 src_managed/
-project/boot/
-project/plugins/project/
+project/*
 src/test/resources
 
 # Scala-IDE specific

@@ -1,4 +1,4 @@
-package com.jaring.jom.util.authentication
+package com.walcron.util.authentication
 
 object EnumAuthentication extends Enumeration{
 	type Authentication = Value
