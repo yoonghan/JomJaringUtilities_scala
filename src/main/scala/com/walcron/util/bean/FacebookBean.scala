@@ -9,3 +9,5 @@ class FacebookBean {
   @BeanProperty
   var clientSecret:String = null
 }
+
+class FacebookTokenBean (var access_token:String, var token_type: String, var expires_in: String)

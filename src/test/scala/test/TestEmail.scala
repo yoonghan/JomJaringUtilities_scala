@@ -11,20 +11,20 @@ class TestEmail extends FlatSpec{
 		val emailUtil = new EmailUtility
 		emailUtil.sendEmail("Hello")
 	}
-  
+
   "Email" should "be able to send multiple" in{
 		val emailUtil = new EmailUtility
-		emailUtil.sendEmail(Option("jomjaring@gmail.com,yoong.han@timwe.com"), "Test 2", "Test message")
+		emailUtil.sendEmail(Option("walcoorperation@gmail.com"), "Test 2", "Test message")
 	}
-  
+
   "Email" should "be able to send as Html" in{
 		val emailUtil = new EmailUtility
-		emailUtil.sendEmailAsHTML(Option.empty, Option("jomjaring@gmail.com,yoong.han@timwe.com"), "Test", 
+		emailUtil.sendEmailAsHTML(Option.empty, Option("walcoorperation@gmail.com"), "Test", 
 """<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Reminder</title>
-		
+
     <style type="text/css">
 		#outlook a{
 			padding:0;
@@ -61,7 +61,7 @@ class TestEmail extends FlatSpec{
 			padding:0;
 			width:100% !important;
 		}
-	
+
 	@tab Page
 	@section heading 2
 	@tip Set the styling for all second-level headings in your emails.
@@ -213,7 +213,7 @@ class TestEmail extends FlatSpec{
 	@tip Set the styling for your calendar's month area.
 	*/
 		.calendarTitleBar{
-			
+
 		}
 	/*
 	@tab Body
@@ -462,7 +462,7 @@ As always, we from JOM Jaring does not incur any charges to our users for using 
 </html>
 """)
 	}
-  
+
 //  "Email" should "be able to send attachment" in{
 //    val emailUtil = new EmailUtility
 //    val attachment = emailUtil.createMultipart("C:/temp/excel_54a4a4341d86e330ad740088.xlsx")

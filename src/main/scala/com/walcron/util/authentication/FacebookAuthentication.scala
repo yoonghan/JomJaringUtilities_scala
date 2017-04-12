@@ -5,14 +5,13 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
 import com.google.api.client.json.jackson2.JacksonFactory
 import java.util.Arrays
 import java.security.SecureRandom
-import com.walcron.util.bean.FacebookBean
+import com.walcron.util.bean.{FacebookBean,FacebookTokenBean}
 import com.walcron.util.common.PropertyLoaderUtil
 import java.util.Properties
 import com.google.api.client.http.GenericUrl
 import com.google.api.client.auth.oauth2.ClientParametersAuthentication
 import com.google.api.client.auth.oauth2.AuthorizationCodeFlow
 import com.google.api.client.auth.oauth2.BearerToken
-import java.util.HashMap
 import com.google.api.client.http.HttpResponse
 import java.io.IOException
 import com.walcron.util.gson.CustomGson
@@ -26,13 +25,13 @@ object FacebookAuthentication{
 
 class FacebookAuthentication(val callBackURI:String)
 	extends IOAuthImpl{
-  
-    private val clientSecretFile = "/facebook.properties";
-    val propertyMap = Array("client.id","client.secret")
-    private val fbBean = new FacebookBean 
-  
-    private val accessTokenKey = "access_token";
-    
+
+	private val clientSecretFile = "/facebook.properties";
+	val propertyMap = Array("client.id","client.secret")
+	private val fbBean = new FacebookBean
+
+	private val accessTokenKey = "access_token";
+
 	private val facebookUrl = "https://www.facebook.com/dialog/oauth";
 	private val facebookTokenUrl = "https://graph.facebook.com/oauth/access_token";
 
@@ -41,24 +40,24 @@ class FacebookAuthentication(val callBackURI:String)
 	private val jsonFactory = JacksonFactory.getDefaultInstance();
 	private val userInfoUrl = "https://graph.facebook.com/me";;
 	private val scopes:java.util.List[String] = Arrays.asList("public_profile", "email");
-	
-	private val profileInfo = "id,name,email,first_name,gender,link";	
-	
+
+	private val profileInfo = "id,name,email,first_name,gender,link";
+
 	private val clientSecrets = loadClientSecrets();
-	
+
 	private val facebookFlow = new AuthorizationCodeFlow.Builder(
 	    		BearerToken.authorizationHeaderAccessMethod(),
 	    		httpTransport, jsonFactory, new GenericUrl(facebookTokenUrl),
-	    		new ClientParametersAuthentication(fbBean.getClientId(), fbBean.getClientSecret()), fbBean.getClientId(), 
+	    		new ClientParametersAuthentication(fbBean.getClientId(), fbBean.getClientSecret()), fbBean.getClientId(),
 	    		facebookUrl)
 	    .setScopes(scopes)
 	    .build();
-	
+
     val genUrl = new GenericUrl(facebookTokenUrl);
     	genUrl.put("client_id", fbBean.getClientId());
     	genUrl.put("client_secret", fbBean.getClientSecret());
     	genUrl.put("redirect_uri", callBackURI);
-      
+
     val userUrl = new GenericUrl(userInfoUrl);
     	userUrl.put("fields", profileInfo);
 
@@ -68,7 +67,7 @@ class FacebookAuthentication(val callBackURI:String)
 			return false;
 		return true;
 	}
-	
+
 	override def generateStateToken:String = {
 		val sr1 = new SecureRandom();
 		return EnumAuthentication.FACEBOOK_TOKEN.toString() +sr1.nextInt();
@@ -79,7 +78,7 @@ class FacebookAuthentication(val callBackURI:String)
 			return None;
 
 		val url = facebookFlow.newAuthorizationUrl();
-		
+
 		return Option.apply(url.setRedirectUri(callBackURI).setState(stateToken).build());
 	}
 
@@ -91,54 +90,49 @@ class FacebookAuthentication(val callBackURI:String)
 		    case 1 => fbBean.setClientSecret(value)
 	    }})
 	}
-	
+
 	override def getUserInfoJson(authCode:String):Option[String] = {
 		return getUserInfoJson(authCode, user);
 	}
-	
-	def getAccessToken(response:HttpResponse):Map[String, String]  = {
+
+	def getAccessToken(response:HttpResponse):String  = {
 		var hashMap:Map[String, String] = Map();
-		
-		val authJsonIdentity = response.parseAsString();
-		
+		val responseString = response.parseAsString();
 		if(response.getStatusCode() == 200){
-			val keyValues = authJsonIdentity.split("&");
-			for(keyValue <- keyValues){
-				val splitKey = keyValue.split("=")
-				hashMap += (splitKey(0) -> splitKey(1))
-			}
+			val authJsonIdentity:FacebookTokenBean = CustomGson.fromGson(responseString, classOf[FacebookTokenBean])
+			authJsonIdentity.access_token;
 		}else{
-			throw new IOException("Error:"+authJsonIdentity)
+			throw new IOException("Error:"+responseString)
 		}
-		
-		return hashMap
+
+		return ""
 	}
-	
+
 	override def getUserInfoJson(authCode:String, userId:String) : Option[String] = {
-		
+
 		if(isConnectable() == false || authCode == null || authCode.isEmpty())
 			return None;
-		
+
 		var jsonIdentity:String = null;
-		
+
 		val requestFactory = httpTransport.createRequestFactory();
 		genUrl.put("code", authCode);
-		
-		val request = requestFactory.buildGetRequest(genUrl);
-		val response = request.execute();
-		
-		val hashMap = getAccessToken(response);
 
-		if(hashMap.contains(accessTokenKey)){
-			userUrl.put(accessTokenKey , hashMap(accessTokenKey));
+		val request = requestFactory.buildGetRequest(genUrl);
+    request.getHeaders().setContentType("application/json");
+		val response = request.execute();
+
+		val accessTokenKey = getAccessToken(response);
+
+		if(!"".equals(accessTokenKey)){
+			userUrl.put(accessTokenKey , accessTokenKey);
 			val userInfoRequest = requestFactory.buildGetRequest(userUrl);
-			request.getHeaders().setContentType("application/json");
 			jsonIdentity = userInfoRequest.execute().parseAsString();
 		}
-		
+
 		return Option.apply(jsonIdentity);
 	}
-	
+
 	override def convertJsonToObj(json:String):Option[FacebookUserInfoEntity] = {
 		if(json == null || json.isEmpty())
 			return None
@@ -146,5 +140,5 @@ class FacebookAuthentication(val callBackURI:String)
 		val facebookInfoEntity =  CustomGson.fromGson(json, entity.getClass())
 		return Option.apply(facebookInfoEntity);
 	}
-	
+
 }
