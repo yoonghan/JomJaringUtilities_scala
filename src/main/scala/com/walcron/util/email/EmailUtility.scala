@@ -8,7 +8,6 @@ import javax.mail.internet.InternetAddress
 import com.walcron.util.common.PropertyLoaderUtil
 import com.walcron.util.bean.EmailPropBean
 import java.util.Properties
-import scala.beans.BeanProperty
 import java.util.Date
 import javax.mail.Message
 import javax.mail.Transport
@@ -16,9 +15,6 @@ import javax.mail.internet.MimeBodyPart
 import javax.activation.FileDataSource
 import javax.activation.DataHandler
 import javax.mail.internet.MimeMultipart
-import java.io.ByteArrayOutputStream
-import java.io.OutputStream
-import javax.mail.internet.MimeUtility
 
 class EmailUtility {
 

@@ -1,10 +1,10 @@
 package test
 
-import com.bean.SampleGsonBean
+import com.walcron.bean.SampleGsonBean
+import com.walcron.util.bean.FacebookTokenBean
 import com.walcron.util.gson.CustomGson
 import org.junit.Assert
 import org.scalatest.FlatSpec
-import java.util.Date
 import java.util.Calendar
 
 class TestCustomGson extends FlatSpec{
@@ -20,5 +20,12 @@ class TestCustomGson extends FlatSpec{
 		val converted:SampleGsonBean = CustomGson.fromGson(jsonValue, classOf[SampleGsonBean])
 		
 		Assert.assertEquals(converted.getSampleDate().getTime(), sampleGson.getSampleDate().getTime());
+	}
+
+	"Facebook Gson" should "can be parsecorrectly" in{
+
+		val jsonString= """{"access_token":"ATOKEN","token_type":"bearer","expires_in":5181978}"""
+		val authJsonIdentity:FacebookTokenBean = CustomGson.fromGson(jsonString, classOf[FacebookTokenBean])
+		Assert.assertEquals("ATOKEN", authJsonIdentity.access_token);
 	}
 }

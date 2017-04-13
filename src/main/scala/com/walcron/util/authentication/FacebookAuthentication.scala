@@ -101,11 +101,10 @@ class FacebookAuthentication(val callBackURI:String)
 		if(response.getStatusCode() == 200){
 			val authJsonIdentity:FacebookTokenBean = CustomGson.fromGson(responseString, classOf[FacebookTokenBean])
 			authJsonIdentity.access_token;
-		}else{
+		}
+		else {
 			throw new IOException("Error:"+responseString)
 		}
-
-		return ""
 	}
 
 	override def getUserInfoJson(authCode:String, userId:String) : Option[String] = {
@@ -119,14 +118,14 @@ class FacebookAuthentication(val callBackURI:String)
 		genUrl.put("code", authCode);
 
 		val request = requestFactory.buildGetRequest(genUrl);
-    request.getHeaders().setContentType("application/json");
-		val response = request.execute();
+    val response = request.execute();
 
 		val accessTokenKey = getAccessToken(response);
 
 		if(!"".equals(accessTokenKey)){
 			userUrl.put(accessTokenKey , accessTokenKey);
 			val userInfoRequest = requestFactory.buildGetRequest(userUrl);
+			request.getHeaders().setContentType("application/json");
 			jsonIdentity = userInfoRequest.execute().parseAsString();
 		}
 
