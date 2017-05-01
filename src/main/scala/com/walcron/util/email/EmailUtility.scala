@@ -16,26 +16,25 @@ import javax.activation.FileDataSource
 import javax.activation.DataHandler
 import javax.mail.internet.MimeMultipart
 
-class EmailUtility {
+class EmailUtility(val emailPropBean: EmailPropBean = new EmailPropBean) {
 
-	val emailPropBean = new EmailPropBean();
+
 	val propertyFileName = "email.properties"
 	val propertyMap = Array("to.user","from.user","subject","mail.user","mail.password")
 
 	val property:Properties = PropertyLoaderUtil.propertyLoader(propertyFileName).get
 
-	PropertyLoaderUtil.map(property, propertyMap, false,
-	    {(i,value)=>i match{
-		    case 0 => emailPropBean.setToUser(value)
-		    case 1 => emailPropBean.setFromUser(value)
-		    case 2 => emailPropBean.setSubject(value)
-		    case 3 => emailPropBean.setUserName(value)
-		    case 4 => emailPropBean.setPassword(value)
-	    }})
+	/**Set only if required**/
+	if(emailPropBean.getProperty == null) {
+		PropertyLoaderUtil.map(property, propertyMap, false, { (i, value) => i match {
+			case 0 => emailPropBean.setToUser(value)
+			case 1 => emailPropBean.setFromUser(value)
+			case 2 => emailPropBean.setSubject(value)
+			case 3 => emailPropBean.setUserName(value)
+			case 4 => emailPropBean.setPassword(value)
+		}
+		})
 
-	emailPropBean.setProperty(property)
-
-	def setCustomEmailProperty(emailPropBean:EmailPropBean):Unit = {
 		emailPropBean.setProperty(property)
 	}
 
