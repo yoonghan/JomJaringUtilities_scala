@@ -35,6 +35,10 @@ class EmailUtility {
 
 	emailPropBean.setProperty(property)
 
+	def setCustomEmailProperty(emailPropBean:EmailPropBean):Unit = {
+		emailPropBean.setProperty(property)
+	}
+
 	def sendEmail(message:String){
 	  val subjectWithDate = String.format("%s [%s]", emailPropBean.getSubject(),
 	      emailPropBean.getDateFormat().format(new Date()));
